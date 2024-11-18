@@ -1,0 +1,1550 @@
+local Library = {}
+
+if cloneref == nil then
+	cloneref = function(ref)
+		return ref
+	end
+end
+
+local TweenService = cloneref(game:GetService("TweenService"))
+local Players = cloneref(game:GetService("Players"))
+local CoreGui = cloneref(game:GetService("CoreGui"))
+local UserInputService = cloneref(game:GetService("UserInputService"))
+local RunService = cloneref(game:GetService("RunService"))
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+function Tween(Object, Time, Props)
+	local Tween_Info = TweenInfo.new(Time, Enum.EasingStyle.Quint)
+	return TweenService:Create(Object, Tween_Info, Props)
+end
+
+function HideUI(ScreenGui : ScreenGui)
+	ScreenGui.Enabled = false
+	
+	return function()
+		
+		if ScreenGui == nil then
+			return
+		end
+		
+		ScreenGui.Enabled = true
+	end
+end
+
+function createToggle()
+	local ToggleTemplate = Instance.new("TextButton")
+	local UICorner_2 = Instance.new("UICorner")
+	local ToggleBk = Instance.new("Frame")
+	local UICorner_3 = Instance.new("UICorner")
+	local Toggle = Instance.new("Frame")
+	local UICorner_4 = Instance.new("UICorner")
+	local Toggle_2 = Instance.new("Frame")
+	local UICorner_5 = Instance.new("UICorner")
+	local title = Instance.new("TextLabel")
+	local desc = Instance.new("TextLabel")
+	
+	ToggleTemplate.Name = "ToggleTemplate"
+	ToggleTemplate.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	ToggleTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ToggleTemplate.BorderSizePixel = 0
+	ToggleTemplate.LayoutOrder = 1
+	ToggleTemplate.Position = UDim2.new(0.0636899546, 0, 0, 0)
+	ToggleTemplate.Size = UDim2.new(1, 0, 0.156000003, 0)
+	ToggleTemplate.AutoButtonColor = false
+	ToggleTemplate.Font = Enum.Font.SourceSans
+	ToggleTemplate.Text = ""
+	ToggleTemplate.TextColor3 = Color3.fromRGB(0, 0, 0)
+	ToggleTemplate.TextSize = 14
+	ToggleTemplate.TextTransparency = 1
+	ToggleTemplate.BackgroundTransparency = 1
+	
+	ToggleTemplate:GetPropertyChangedSignal("GuiState"):Connect(function()
+		if ToggleTemplate.GuiState == Enum.GuiState.Hover then
+			Tween(ToggleTemplate, .25, {
+				BackgroundTransparency = 0.
+			}):Play()
+		end
+	end)
+	
+	ToggleTemplate.MouseLeave:Connect(function()
+		Tween(ToggleTemplate, .25, {
+			BackgroundTransparency = 1
+		}):Play()
+	end)
+
+	UICorner_2.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_2.Parent = ToggleTemplate
+
+	ToggleBk.Name = "ToggleBk"
+	ToggleBk.Parent = ToggleTemplate
+	ToggleBk.AnchorPoint = Vector2.new(0, 0.5)
+	ToggleBk.BackgroundColor3 = Color3.fromRGB(255, 14, 14)
+	ToggleBk.BackgroundTransparency = 0.900
+	ToggleBk.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ToggleBk.BorderSizePixel = 0
+	ToggleBk.Position = UDim2.new(0.774999976, 0, 0.5, 0)
+	ToggleBk.Size = UDim2.new(0.185000002, 0, 0.535600007, 0)
+	ToggleBk.ZIndex = 2
+	
+	UICorner_3.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_3.Parent = ToggleBk
+
+	Toggle.Name = "Toggle"
+	Toggle.Parent = ToggleBk
+	Toggle.AnchorPoint = Vector2.new(0.5, 0.5)
+	Toggle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Toggle.BackgroundTransparency = 1
+	Toggle.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Toggle.BorderSizePixel = 0
+	Toggle.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Toggle.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
+	Toggle.ZIndex = 2
+	
+	UICorner_4.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_4.Parent = Toggle
+
+	Toggle_2.Name = "Toggle"
+	Toggle_2.Parent = Toggle
+	Toggle_2.AnchorPoint = Vector2.new(0, 0.5)
+	Toggle_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Toggle_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Toggle_2.BorderSizePixel = 0
+	Toggle_2.Position = UDim2.new(0, 0, 0.5, 0)
+	Toggle_2.Size = UDim2.new(0.370000005, 0, 0.899999976, 0)
+	Toggle_2.ZIndex = 2
+	
+	UICorner_5.CornerRadius = UDim.new(0.25, 0)
+	UICorner_5.Parent = Toggle_2
+
+	title.Name = "title"
+	title.Parent = ToggleTemplate
+	title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title.BackgroundTransparency = 1
+	title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	title.BorderSizePixel = 0
+	title.Position = UDim2.new(0.0371153727, 0, 0.190596327, 0)
+	title.Size = UDim2.new(0.698321998, 0, 0.28717941, 0)
+	title.Font = Enum.Font.SourceSans
+	title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title.TextScaled = true
+	title.TextSize = 14
+	title.TextWrapped = true
+	title.TextXAlignment = Enum.TextXAlignment.Left
+
+	desc.Name = "desc"
+	desc.Parent = ToggleTemplate
+	desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	desc.BackgroundTransparency = 1
+	desc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	desc.BorderSizePixel = 0
+	desc.Position = UDim2.new(0.0371153727, 0, 0.541145086, 0)
+	desc.Size = UDim2.new(0.699000001, 0, 0.3829059, 0)
+	desc.Font = Enum.Font.SourceSans
+	desc.TextColor3 = Color3.fromRGB(225, 225, 225)
+	desc.TextScaled = true
+	desc.TextSize = 14
+	desc.TextTransparency = 0.100
+	desc.TextWrapped = true
+	desc.TextXAlignment = Enum.TextXAlignment.Left
+	
+	return ToggleTemplate
+	
+end
+
+function createButton()
+	local ButtonTemplate = Instance.new("TextButton")
+	local UICorner_6 = Instance.new("UICorner")
+	local title_2 = Instance.new("TextLabel")
+	local desc_2 = Instance.new("TextLabel")
+	
+	ButtonTemplate.Name = "ButtonTemplate"
+	ButtonTemplate.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	ButtonTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ButtonTemplate.BorderSizePixel = 0
+	ButtonTemplate.LayoutOrder = 2
+	ButtonTemplate.Position = UDim2.new(0.0636899546, 0, 0, 0)
+	ButtonTemplate.Size = UDim2.new(1, 0, 0.156000003, 0)
+	ButtonTemplate.AutoButtonColor = false
+	ButtonTemplate.Font = Enum.Font.SourceSans
+	ButtonTemplate.Text = ""
+	ButtonTemplate.TextColor3 = Color3.fromRGB(0, 0, 0)
+	ButtonTemplate.TextSize = 14
+	ButtonTemplate.TextTransparency = 1
+	ButtonTemplate.BackgroundTransparency = 1
+
+	ButtonTemplate:GetPropertyChangedSignal("GuiState"):Connect(function()
+		if ButtonTemplate.GuiState == Enum.GuiState.Hover then
+			Tween(ButtonTemplate, .25, {
+				BackgroundTransparency = 0.
+			}):Play()
+		end
+	end)
+
+	ButtonTemplate.MouseLeave:Connect(function()
+		Tween(ButtonTemplate, .25, {
+			BackgroundTransparency = 1
+		}):Play()
+	end)
+	UICorner_6.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_6.Parent = ButtonTemplate
+
+	title_2.Name = "title"
+	title_2.Parent = ButtonTemplate
+	title_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title_2.BackgroundTransparency = 1
+	title_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	title_2.BorderSizePixel = 0
+	title_2.Position = UDim2.new(0.0371153727, 0, 0.190596327, 0)
+	title_2.Size = UDim2.new(0.698321998, 0, 0.28717941, 0)
+	title_2.Font = Enum.Font.SourceSans
+	title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title_2.TextScaled = true
+	title_2.TextSize = 14
+	title_2.TextWrapped = true
+	title_2.TextXAlignment = Enum.TextXAlignment.Left
+
+	desc_2.Name = "desc"
+	desc_2.Parent = ButtonTemplate
+	desc_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	desc_2.BackgroundTransparency = 1
+	desc_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	desc_2.BorderSizePixel = 0
+	desc_2.Position = UDim2.new(0.0371153727, 0, 0.541145086, 0)
+	desc_2.Size = UDim2.new(0.699000001, 0, 0.3829059, 0)
+	desc_2.Font = Enum.Font.SourceSans
+	desc_2.TextColor3 = Color3.fromRGB(225, 225, 225)
+	desc_2.TextScaled = true
+	desc_2.TextSize = 14
+	desc_2.TextTransparency = 0.100
+	desc_2.TextWrapped = true
+	desc_2.TextXAlignment = Enum.TextXAlignment.Left
+	
+	return ButtonTemplate
+	
+end
+
+function createDropdown()
+	local DropdownTemplate = Instance.new("TextButton")
+	local UICorner_9 = Instance.new("UICorner")
+	local title_4 = Instance.new("TextLabel")
+	local desc_4 = Instance.new("TextLabel")
+	local List_2 = Instance.new("ScrollingFrame")
+	
+	local UIListLayout_3 = Instance.new("UIListLayout")
+	
+	DropdownTemplate.Name = "DropdownTemplate"
+	DropdownTemplate.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	DropdownTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	DropdownTemplate.BorderSizePixel = 0
+	DropdownTemplate.LayoutOrder = 4
+	DropdownTemplate.Position = UDim2.new(0.0636899546, 0, 0, 0)
+	DropdownTemplate.Size = UDim2.new(1, 0, 0.156000003, 0)
+	DropdownTemplate.AutoButtonColor = false
+	DropdownTemplate.Font = Enum.Font.SourceSans
+	DropdownTemplate.Text = ""
+	DropdownTemplate.TextColor3 = Color3.fromRGB(0, 0, 0)
+	DropdownTemplate.TextSize = 14
+	DropdownTemplate.TextTransparency = 1
+
+	UICorner_9.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_9.Parent = DropdownTemplate
+
+	title_4.Name = "title"
+	title_4.Parent = DropdownTemplate
+	title_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title_4.BackgroundTransparency = 1
+	title_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	title_4.BorderSizePixel = 0
+	title_4.Position = UDim2.new(0.0371153727, 0, 0.190596327, 0)
+	title_4.Size = UDim2.new(0.698321998, 0, 0.28717941, 0)
+	title_4.Font = Enum.Font.SourceSans
+	title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title_4.TextScaled = true
+	title_4.TextSize = 14
+	title_4.TextWrapped = true
+	title_4.TextXAlignment = Enum.TextXAlignment.Left
+
+	desc_4.Name = "desc"
+	desc_4.Parent = DropdownTemplate
+	desc_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	desc_4.BackgroundTransparency = 1
+	desc_4.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	desc_4.BorderSizePixel = 0
+	desc_4.Position = UDim2.new(0.0371153727, 0, 0.541145086, 0)
+	desc_4.Size = UDim2.new(0.699000001, 0, 0.3829059, 0)
+	desc_4.Font = Enum.Font.SourceSans
+	desc_4.TextColor3 = Color3.fromRGB(225, 225, 225)
+	desc_4.TextScaled = true
+	desc_4.TextSize = 14
+	desc_4.TextTransparency = 0.100
+	desc_4.TextWrapped = true
+	desc_4.TextXAlignment = Enum.TextXAlignment.Left
+
+	List_2.Name = "List"
+	List_2.Parent = DropdownTemplate
+	List_2.Active = true
+	List_2.AnchorPoint = Vector2.new(0.5, 0)
+	List_2.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	List_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	List_2.BorderSizePixel = 0
+	List_2.Position = UDim2.new(0.5, 0, 1.25, 0)
+	List_2.Size = UDim2.new(1, 0, 2, 0)
+	List_2.Visible = false
+	List_2.ZIndex = 3
+	List_2.CanvasSize = UDim2.new(0, 0, 0, 0)
+	List_2.ScrollBarThickness = 5
+
+	UIListLayout_3.Parent = List_2
+	UIListLayout_3.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout_3.SortOrder = Enum.SortOrder.LayoutOrder
+	
+	return DropdownTemplate
+end
+
+function createKeybind()
+	local KeybindTemplate = Instance.new("TextButton")
+	local UICorner_7 = Instance.new("UICorner")
+	local title_3 = Instance.new("TextLabel")
+	local desc_3 = Instance.new("TextLabel")
+	local KeyBk = Instance.new("Frame")
+	local UICorner_8 = Instance.new("UICorner")
+	local Key = Instance.new("TextLabel")
+
+	KeybindTemplate.Name = "KeybindTemplate"
+	KeybindTemplate.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	KeybindTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	KeybindTemplate.BorderSizePixel = 0
+	KeybindTemplate.LayoutOrder = 3
+	KeybindTemplate.Position = UDim2.new(0.0636899546, 0, 0, 0)
+	KeybindTemplate.Size = UDim2.new(1, 0, 0.156000003, 0)
+	KeybindTemplate.AutoButtonColor = false
+	KeybindTemplate.Font = Enum.Font.SourceSans
+	KeybindTemplate.Text = ""
+	KeybindTemplate.TextColor3 = Color3.fromRGB(0, 0, 0)
+	KeybindTemplate.TextSize = 14
+	KeybindTemplate.TextTransparency = 1
+	KeybindTemplate.BackgroundTransparency = 1
+
+	KeybindTemplate:GetPropertyChangedSignal("GuiState"):Connect(function()
+		if KeybindTemplate.GuiState == Enum.GuiState.Hover then
+			Tween(KeybindTemplate, .25, {
+				BackgroundTransparency = 0.
+			}):Play()
+		end
+	end)
+
+	KeybindTemplate.MouseLeave:Connect(function()
+		Tween(KeybindTemplate, .25, {
+			BackgroundTransparency = 1
+		}):Play()
+	end)
+	UICorner_7.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_7.Parent = KeybindTemplate
+
+	title_3.Name = "title"
+	title_3.Parent = KeybindTemplate
+	title_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title_3.BackgroundTransparency = 1
+	title_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	title_3.BorderSizePixel = 0
+	title_3.Position = UDim2.new(0.0371153727, 0, 0.190596327, 0)
+	title_3.Size = UDim2.new(0.698321998, 0, 0.28717941, 0)
+	title_3.Font = Enum.Font.SourceSans
+	title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title_3.TextScaled = true
+	title_3.TextSize = 14
+	title_3.TextWrapped = true
+	title_3.TextXAlignment = Enum.TextXAlignment.Left
+
+	desc_3.Name = "desc"
+	desc_3.Parent = KeybindTemplate
+	desc_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	desc_3.BackgroundTransparency = 1
+	desc_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	desc_3.BorderSizePixel = 0
+	desc_3.Position = UDim2.new(0.0371153727, 0, 0.541145086, 0)
+	desc_3.Size = UDim2.new(0.699000001, 0, 0.3829059, 0)
+	desc_3.Font = Enum.Font.SourceSans
+	desc_3.TextColor3 = Color3.fromRGB(225, 225, 225)
+	desc_3.TextScaled = true
+	desc_3.TextSize = 14
+	desc_3.TextTransparency = 0.100
+	desc_3.TextWrapped = true
+	desc_3.TextXAlignment = Enum.TextXAlignment.Left
+
+	KeyBk.Name = "KeyBk"
+	KeyBk.Parent = KeybindTemplate
+	KeyBk.AnchorPoint = Vector2.new(0, 0.5)
+	KeyBk.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	KeyBk.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	KeyBk.BorderSizePixel = 0
+	KeyBk.Position = UDim2.new(0.867999971, 0, 0.5, 0)
+	KeyBk.Size = UDim2.new(0.0930000022, 0, 0.680000007, 0)
+
+	UICorner_8.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_8.Parent = KeyBk
+
+	Key.Name = "Key"
+	Key.Parent = KeyBk
+	Key.AnchorPoint = Vector2.new(0.5, 0.5)
+	Key.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Key.BackgroundTransparency = 1
+	Key.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Key.BorderSizePixel = 0
+	Key.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Key.Size = UDim2.new(0.800000012, 0, 0.800000012, 0)
+	Key.Font = Enum.Font.SourceSans
+	Key.Text = "..."
+	Key.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Key.TextScaled = true
+	Key.TextSize = 14
+	Key.TextWrapped = true
+	
+	return KeybindTemplate
+	
+end
+
+function createColorPicker()
+	local ColorPickerTemplate = Instance.new("TextButton")
+	local ColorBlock = Instance.new("ImageLabel")
+	local Picker = Instance.new("Frame")
+	local ValueBlock = Instance.new("ImageLabel")
+	local Picker_2 = Instance.new("Frame")
+	local UICorner_10 = Instance.new("UICorner")
+	local title_5 = Instance.new("TextLabel")
+	local desc_5 = Instance.new("TextLabel")
+	local Deco = Instance.new("Frame")
+	local Main_2 = Instance.new("Frame")
+	local UICorner_11 = Instance.new("UICorner")
+	local UICorner_12 = Instance.new("UICorner")
+	local ColorPicker = Instance.new("Frame")
+	local ColorBk = Instance.new("Frame")
+	local Color = Instance.new("Frame")
+	
+	ColorPickerTemplate.Name = "ColorPickerTemplate"
+	ColorPickerTemplate.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	ColorPickerTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ColorPickerTemplate.BorderSizePixel = 0
+	ColorPickerTemplate.LayoutOrder = 5
+	ColorPickerTemplate.Position = UDim2.new(0.0636899546, 0, 0, 0)
+	ColorPickerTemplate.Size = UDim2.new(1, 0, 0.156000003, 0)
+	ColorPickerTemplate.AutoButtonColor = false
+	ColorPickerTemplate.Font = Enum.Font.SourceSans
+	ColorPickerTemplate.Text = ""
+	ColorPickerTemplate.TextColor3 = Color3.fromRGB(0, 0, 0)
+	ColorPickerTemplate.TextSize = 14
+	ColorPickerTemplate.TextTransparency = 1
+
+	UICorner_10.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner_10.Parent = ColorPickerTemplate
+
+	title_5.Name = "title"
+	title_5.Parent = ColorPickerTemplate
+	title_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title_5.BackgroundTransparency = 1
+	title_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	title_5.BorderSizePixel = 0
+	title_5.Position = UDim2.new(0.0371153727, 0, 0.190596327, 0)
+	title_5.Size = UDim2.new(0.698321998, 0, 0.28717941, 0)
+	title_5.Font = Enum.Font.SourceSans
+	title_5.Text = "Color picker"
+	title_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title_5.TextScaled = true
+	title_5.TextSize = 14
+	title_5.TextWrapped = true
+	title_5.TextXAlignment = Enum.TextXAlignment.Left
+
+	desc_5.Name = "desc"
+	desc_5.Parent = ColorPickerTemplate
+	desc_5.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	desc_5.BackgroundTransparency = 1
+	desc_5.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	desc_5.BorderSizePixel = 0
+	desc_5.Position = UDim2.new(0.0371153727, 0, 0.541145086, 0)
+	desc_5.Size = UDim2.new(0.699000001, 0, 0.3829059, 0)
+	desc_5.Font = Enum.Font.SourceSans
+	desc_5.Text = "Choose your favourite color"
+	desc_5.TextColor3 = Color3.fromRGB(225, 225, 225)
+	desc_5.TextScaled = true
+	desc_5.TextSize = 14
+	desc_5.TextTransparency = 0.100
+	desc_5.TextWrapped = true
+	desc_5.TextXAlignment = Enum.TextXAlignment.Left
+
+	ColorBk.Name = "ColorBk"
+	ColorBk.Parent = ColorPickerTemplate
+	ColorBk.AnchorPoint = Vector2.new(0, 0.5)
+	ColorBk.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	ColorBk.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ColorBk.BorderSizePixel = 0
+	ColorBk.Position = UDim2.new(0.867999971, 0, 0.5, 0)
+	ColorBk.Size = UDim2.new(0.0930000022, 0, 0.680000007, 0)
+
+	UICorner_11.CornerRadius = UDim.new(0.200000003, 0)
+	UICorner_11.Parent = ColorBk
+
+	Color.Name = "Color"
+	Color.Parent = ColorBk
+	Color.AnchorPoint = Vector2.new(0.5, 0.5)
+	Color.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	Color.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Color.BorderSizePixel = 0
+	Color.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Color.Size = UDim2.new(0.699999988, 0, 0.699999988, 0)
+
+	UICorner_12.CornerRadius = UDim.new(0.200000003, 0)
+	UICorner_12.Parent = Color
+
+	ColorPicker.Name = "ColorPicker"
+	ColorPicker.Parent = ColorPickerTemplate
+	ColorPicker.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	ColorPicker.BackgroundTransparency = 0.035
+	ColorPicker.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ColorPicker.BorderSizePixel = 0
+	ColorPicker.Position = UDim2.new(0.340448111, 0, 0.984562755, 0)
+	ColorPicker.Size = UDim2.new(0.620044589, 0, 3.36284423, 0)
+	ColorPicker.Visible = false
+
+	Deco.Name = "Deco"
+	Deco.Parent = ColorPicker
+	Deco.BackgroundColor3 = Color3.fromRGB(121, 121, 121)
+	Deco.BackgroundTransparency = 1
+	Deco.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Deco.BorderSizePixel = 0
+	Deco.Position = UDim2.new(0, 0, 0, -13)
+	Deco.Size = UDim2.new(1, 0, 1.09090912, 0)
+	Deco.ZIndex = 2
+
+	Main_2.Name = "Main"
+	Main_2.Parent = ColorPicker
+	Main_2.BackgroundColor3 = Color3.fromRGB(207, 207, 207)
+	Main_2.BackgroundTransparency = 1
+	Main_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Main_2.BorderSizePixel = 0
+	Main_2.ClipsDescendants = true
+	Main_2.Position = UDim2.new(4.83737068e-08, 0, 0, 0)
+	Main_2.Size = UDim2.new(0.9996714, 0, 1, 0)
+	Main_2.ZIndex = 2
+
+	ColorBlock.Name = "ColorBlock"
+	ColorBlock.Parent = Main_2
+	ColorBlock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ColorBlock.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ColorBlock.BorderSizePixel = 0
+	ColorBlock.Position = UDim2.new(0, 10, 0, 10)
+	ColorBlock.Size = UDim2.new(0.677123189, 0, 0.849435627, 0)
+	ColorBlock.Image = "rbxassetid://17073799681"
+
+	Picker.Name = "Picker"
+	Picker.Parent = ColorBlock
+	Picker.AnchorPoint = Vector2.new(0.5, 0.5)
+	Picker.BackgroundColor3 = Color3.fromRGB(97, 97, 97)
+	Picker.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Picker.BorderSizePixel = 0
+	Picker.Position = UDim2.new(0.5, 0, 1, 0)
+	Picker.Size = UDim2.new(0.0333333351, 0, 0.0333333351, 0)
+
+	ValueBlock.Name = "ValueBlock"
+	ValueBlock.Parent = Main_2
+	ValueBlock.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ValueBlock.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	ValueBlock.BorderSizePixel = 0
+	ValueBlock.Position = UDim2.new(0, 151, 0, 12)
+	ValueBlock.Size = UDim2.new(0, 12, 0, 111)
+	ValueBlock.Image = "rbxassetid://17073827687"
+
+	Picker_2.Name = "Picker"
+	Picker_2.Parent = ValueBlock
+	Picker_2.AnchorPoint = Vector2.new(0.5, 0.5)
+	Picker_2.BackgroundColor3 = Color3.fromRGB(97, 97, 97)
+	Picker_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Picker_2.BorderSizePixel = 0
+	Picker_2.Position = UDim2.new(0.5, 0, 0, 0)
+	Picker_2.Size = UDim2.new(0, 25, 0, 5)
+	
+	return ColorPickerTemplate
+	
+end
+
+function createTab()
+	local TabBtn = Instance.new("TextButton")
+	local UICorner = Instance.new("UICorner")
+	local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
+	
+	TabBtn.Name = "TabBtn"
+	TabBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	TabBtn.BackgroundTransparency = 1
+	TabBtn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TabBtn.BorderSizePixel = 0
+	TabBtn.Position = UDim2.new(2.09275356e-07, 0, 0.0999998525, 0)
+	TabBtn.Size = UDim2.new(0.169574007, 0, 0.799999952, 0)
+	TabBtn.AutoButtonColor = false
+	TabBtn.Font = Enum.Font.SourceSans
+	TabBtn.Text = "Comat"
+	TabBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+	TabBtn.TextScaled = true
+	TabBtn.TextSize = 14
+	TabBtn.TextWrapped = true
+
+	UICorner.CornerRadius = UDim.new(0.125, 0)
+	UICorner.Parent = TabBtn
+
+	UITextSizeConstraint.Parent = TabBtn
+	UITextSizeConstraint.MaxTextSize = 15
+	
+	local TabFrame = Instance.new("Frame")
+	local List = Instance.new("ScrollingFrame")
+	local UIListLayout_2 = Instance.new("UIListLayout")
+	
+	TabFrame.Name = "TabFrame"
+	TabFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	TabFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TabFrame.BackgroundTransparency = 1
+	TabFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TabFrame.BorderSizePixel = 0
+	TabFrame.Position = UDim2.new(0.5, 0, 0.584999979, 0)
+	TabFrame.Size = UDim2.new(0.949999988, 0, 0.800000012, 0)
+	TabFrame.Visible = false
+	
+	List.Name = "List"
+	List.Parent = TabFrame
+	List.Active = true
+	List.AnchorPoint = Vector2.new(0.5, 0.5)
+	List.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	List.BackgroundTransparency = 1
+	List.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	List.BorderSizePixel = 0
+	List.ClipsDescendants = false
+	List.Position = UDim2.new(0.5, 0, 0.5, 0)
+	List.Size = UDim2.new(0.995000005, 0, 0.970000029, 0)
+	List.CanvasSize = UDim2.new(0, 0, 0, 0)
+	List.ScrollBarThickness = 3
+
+	UIListLayout_2.Parent = List
+	UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout_2.Padding = UDim.new(0.0250000004, 0)
+	
+	return TabFrame, TabBtn
+end
+
+function createDropdownOption()
+	
+	local DropdownBtnTemplate = Instance.new("TextButton")
+	DropdownBtnTemplate.Name = "DropdownBtnTemplate"
+	DropdownBtnTemplate.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	DropdownBtnTemplate.BackgroundTransparency = 1
+	DropdownBtnTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	DropdownBtnTemplate.BorderSizePixel = 0
+	DropdownBtnTemplate.Size = UDim2.new(1, 0, 0.25, 0)
+	DropdownBtnTemplate.ZIndex = 3
+	DropdownBtnTemplate.Font = Enum.Font.SourceSans
+	DropdownBtnTemplate.Text = "option 1"
+	DropdownBtnTemplate.TextColor3 = Color3.fromRGB(255, 255, 255)
+	DropdownBtnTemplate.TextScaled = true
+	DropdownBtnTemplate.TextSize = 14
+	DropdownBtnTemplate.TextWrapped = true
+	
+	return DropdownBtnTemplate
+	
+end
+
+function createSlider()
+	local SliderTemplate = Instance.new("TextButton")
+	local UICorner = Instance.new("UICorner")
+	local title = Instance.new("TextLabel")
+	local desc = Instance.new("TextLabel")
+	local SliderBk = Instance.new("Frame")
+	local UICorner_2 = Instance.new("UICorner")
+	local Bar = Instance.new("Frame")
+	local UICorner_3 = Instance.new("UICorner")
+	local SliderValue = Instance.new("TextLabel")
+
+	SliderTemplate.Name = "SliderTemplate"
+	SliderTemplate.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+	SliderTemplate.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	SliderTemplate.BorderSizePixel = 0
+	SliderTemplate.LayoutOrder = 6
+	SliderTemplate.Position = UDim2.new(0.0636899546, 0, 0, 0)
+	SliderTemplate.Size = UDim2.new(1, 0, 0.156000003, 0)
+	SliderTemplate.AutoButtonColor = false
+	SliderTemplate.Font = Enum.Font.SourceSans
+	SliderTemplate.Text = ""
+	SliderTemplate.TextColor3 = Color3.fromRGB(0, 0, 0)
+	SliderTemplate.TextSize = 14.000
+	SliderTemplate.TextTransparency = 1.000
+	SliderTemplate.BackgroundTransparency = 1
+
+	SliderTemplate:GetPropertyChangedSignal("GuiState"):Connect(function()
+		if SliderTemplate.GuiState == Enum.GuiState.Hover then
+			Tween(SliderTemplate, .25, {
+				BackgroundTransparency = 0.
+			}):Play()
+		end
+	end)
+
+	SliderTemplate.MouseLeave:Connect(function()
+		Tween(SliderTemplate, .25, {
+			BackgroundTransparency = 1
+		}):Play()
+	end)
+	
+	UICorner.CornerRadius = UDim.new(0.075000003, 0)
+	UICorner.Parent = SliderTemplate
+
+	title.Name = "title"
+	title.Parent = SliderTemplate
+	title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	title.BackgroundTransparency = 1.000
+	title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	title.BorderSizePixel = 0
+	title.Position = UDim2.new(0.0371155627, 0, 0.190595955, 0)
+	title.Size = UDim2.new(0.357492536, 0, 0.28717941, 0)
+	title.Font = Enum.Font.SourceSans
+	title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title.TextScaled = true
+	title.TextSize = 14.000
+	title.TextWrapped = true
+	title.TextXAlignment = Enum.TextXAlignment.Left
+
+	desc.Name = "desc"
+	desc.Parent = SliderTemplate
+	desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	desc.BackgroundTransparency = 1.000
+	desc.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	desc.BorderSizePixel = 0
+	desc.Position = UDim2.new(0.0371151417, 0, 0.541145205, 0)
+	desc.Size = UDim2.new(0.357492745, 0, 0.38290593, 0)
+	desc.Font = Enum.Font.SourceSans
+	desc.TextColor3 = Color3.fromRGB(225, 225, 225)
+	desc.TextScaled = true
+	desc.TextSize = 14.000
+	desc.TextTransparency = 0.100
+	desc.TextWrapped = true
+	desc.TextXAlignment = Enum.TextXAlignment.Left
+
+	SliderBk.Name = "SliderBk"
+	SliderBk.Parent = SliderTemplate
+	SliderBk.AnchorPoint = Vector2.new(0, 0.5)
+	SliderBk.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+	SliderBk.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	SliderBk.BorderSizePixel = 0
+	SliderBk.Position = UDim2.new(0.575089753, 0, 0.499999702, 0)
+	SliderBk.Size = UDim2.new(0.386000007, 0, 0.449999988, 0)
+
+	UICorner_2.CornerRadius = UDim.new(0.200000003, 0)
+	UICorner_2.Parent = SliderBk
+
+	Bar.Name = "Bar"
+	Bar.Parent = SliderBk
+	Bar.AnchorPoint = Vector2.new(0, 0.5)
+	Bar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Bar.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Bar.BorderSizePixel = 0
+	Bar.Position = UDim2.new(1.08977713e-06, 0, 0.50000006, 0)
+	Bar.Size = UDim2.new(0.517901182, 0, 1.00000012, 0)
+
+	UICorner_3.CornerRadius = UDim.new(0.200000003, 0)
+	UICorner_3.Parent = Bar
+
+	SliderValue.Name = "SliderValue"
+	SliderValue.Parent = SliderBk
+	SliderValue.AnchorPoint = Vector2.new(0.5, 0.5)
+	SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	SliderValue.BackgroundTransparency = 1.000
+	SliderValue.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	SliderValue.BorderSizePixel = 0
+	SliderValue.Position = UDim2.new(0.5, 0, 0.5, 0)
+	SliderValue.Size = UDim2.new(0.75, 0, 0.75, 0)
+	SliderValue.Font = Enum.Font.SourceSans
+	SliderValue.Text = "50 / 100"
+	SliderValue.TextColor3 = Color3.fromRGB(0, 0, 0)
+	SliderValue.TextScaled = true
+	SliderValue.TextSize = 14.000
+	SliderValue.TextTransparency = 0.100
+	SliderValue.TextWrapped = true
+	
+	return SliderTemplate
+	
+end
+
+local selected_keybind = false
+
+local KeybindStorage = {}
+
+function Comma(...)
+	local f,k; f,k=...
+	if k ~= nil then k = nil end
+	while (true) do
+		f,k = string.gsub(f,"^(-?%d+)(%d%d%d)","%1,%2")
+		if (k == 0) then break end
+	end
+	return f
+end
+
+function BuildUSUGui()
+	
+	repeat
+		if CoreGui:FindFirstChild("USU") then
+			CoreGui:FindFirstChild("USU"):Destroy()
+		end
+		task.wait()
+	until not CoreGui:FindFirstChild("USU")
+	
+	local USU = Instance.new("ScreenGui")
+	local Main = Instance.new("Frame")
+	local Title = Instance.new("TextLabel")
+	local lines = Instance.new("Folder")
+	local Frame = Instance.new("Frame")
+	local Frame_2 = Instance.new("Frame")
+	local TabButtons = Instance.new("ScrollingFrame")
+	local UIListLayout = Instance.new("UIListLayout")
+	local tabs = Instance.new("Folder")
+
+	USU.Name = "USU"
+	USU.Parent = CoreGui
+
+	Main.Name = "Main"
+	Main.Parent = USU
+	Main.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	Main.BackgroundTransparency = 0.035
+	Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Main.BorderSizePixel = 0
+	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main.Size = UDim2.new(0, 307, 0, 326)
+	Main.AnchorPoint = Vector2.new(.5, .5)
+	Main.Active = true
+	
+	Title.Name = "Title"
+	Title.Parent = Main
+	Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Title.BackgroundTransparency = 1
+	Title.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Title.BorderSizePixel = 0
+	Title.Position = UDim2.new(0.0329512432, 0, 0.0200000126, 0)
+	Title.Size = UDim2.new(0.224390239, 0, 0.0435583182, 0)
+	Title.Font = Enum.Font.SourceSans
+	Title.Text = "USU "
+	Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Title.TextScaled = true
+	Title.TextSize = 14
+	Title.TextWrapped = true
+	Title.TextXAlignment = Enum.TextXAlignment.Left
+
+	lines.Name = "lines"
+	lines.Parent = Main
+
+	Frame.Parent = lines
+	Frame.AnchorPoint = Vector2.new(0.5, 0)
+	Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame.BorderSizePixel = 0
+	Frame.Position = UDim2.new(0.5, 0, 0.0799999982, 0)
+	Frame.Size = UDim2.new(0.949999988, 0, 0.00325, 0)
+
+	Frame_2.Parent = lines
+	Frame_2.AnchorPoint = Vector2.new(0.5, 0)
+	Frame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	Frame_2.BorderSizePixel = 0
+	Frame_2.Position = UDim2.new(0.5, 0, 0.174999997, 0)
+	Frame_2.Size = UDim2.new(0.949999988, 0, 0.00325, 0)
+
+	TabButtons.Name = "TabButtons"
+	TabButtons.Parent = Main
+	TabButtons.Active = true
+	TabButtons.AnchorPoint = Vector2.new(0.5, 0)
+	TabButtons.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TabButtons.BackgroundTransparency = 1
+	TabButtons.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TabButtons.BorderSizePixel = 0
+	TabButtons.Position = UDim2.new(0.5, 0, 0.0869999975, 0)
+	TabButtons.Size = UDim2.new(0.949999988, 0, 0.0850000009, 0)
+	TabButtons.CanvasSize = UDim2.new(0, 0, 0, 0)
+	TabButtons.HorizontalScrollBarInset = Enum.ScrollBarInset.Always
+	TabButtons.ScrollBarThickness = 3
+
+	UIListLayout.Parent = TabButtons
+	UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+	UIListLayout.Padding = UDim.new(0.0125000002, 0)
+
+	tabs.Name = "tabs"
+	tabs.Parent = Main
+	
+	local LibraryFunctions = {}
+	
+	function LibraryFunctions:HideAllTabs(Exception)
+		for _, v in pairs(tabs:GetChildren()) do
+			if v:IsA("Frame") then
+				if Exception ~= nil and typeof(Exception) == 'table' and rawget(Exception, v.Name) ~= nil then
+					continue -- ignore this tab
+				end
+				v.Visible = false
+			end
+		end
+	end
+	
+	function LibraryFunctions:SetCurrentTab(TabName : string)
+		if not tabs:FindFirstChild(TabName) then
+			return error(("tab %s does not exist."):format(TabName))
+		end
+		
+		LibraryFunctions:HideAllTabs({TabName})
+		local Tab = tabs:FindFirstChild(TabName)
+		if Tab.Visible ~= true then Tab.Visible = true end
+		
+	end
+	
+	function LibraryFunctions:SetupTab(TabName : string, TabFrame : Frame, TabBtn : TextButton)
+		TabFrame.Parent = tabs
+		TabFrame.Name = TabName
+		TabBtn.LayoutOrder = #TabButtons:GetChildren() + 1
+		TabBtn.Parent = TabButtons
+		TabBtn.Text = TabName
+		TabBtn.MouseButton1Click:Connect(function()
+			LibraryFunctions:SetCurrentTab(TabName)
+		end)
+		
+		TabBtn:GetPropertyChangedSignal("GuiState"):Connect(function()
+			if TabBtn.GuiState == Enum.GuiState.Hover then
+				for i, v in pairs(TabButtons:GetChildren()) do
+					if v:IsA("TextButton") and v ~= TabBtn then
+						Tween(v, .5, {
+							BackgroundTransparency = 1
+						}):Play()
+					end
+				end
+				Tween(TabBtn, .5, {
+					BackgroundTransparency = 0.05
+				}):Play()
+			end
+		end)
+		
+		TabBtn.MouseLeave:Connect(function()
+			Tween(TabBtn, .5, {
+				BackgroundTransparency = 1
+			}):Play()
+		end)
+		
+		local TabFunctions = {}
+		local TabList = TabFrame:FindFirstChildOfClass("ScrollingFrame")
+		
+		function TabFunctions:SetupToggle(NewToggle : TextButton, ToggleName : string, ToggleCallback, ToggleDesc : string)
+			local ToggleBk = NewToggle:FindFirstChild("ToggleBk")
+			local Toggle = ToggleBk:FindFirstChild("Toggle"):FindFirstChild("Toggle")
+			NewToggle.LayoutOrder = #TabList:GetChildren() + 1
+			NewToggle.Parent = TabList
+			NewToggle:FindFirstChild("title").Text = ToggleName
+			if ToggleDesc == nil then
+				NewToggle:FindFirstChild("desc").Visible = false
+			else
+				NewToggle:FindFirstChild("desc").Text = ToggleDesc
+			end
+			
+			local ToggleFunctions = {}
+			local Tween_Time = .25
+			
+			function ToggleFunctions:UpdateToggle(bool : boolean, removeTween)
+				if ToggleCallback ~= nil and typeof(ToggleCallback) == 'function' then
+					ToggleCallback(bool)
+				end
+				if removeTween ~= nil and typeof(removeTween) == 'boolean' and (removeTween == true) then
+					
+					if (bool == true) then
+						ToggleBk.BackgroundColor3 = Color3.fromRGB(91, 255, 2);
+						Toggle.Position = UDim2.fromScale(.635, .5)
+					elseif (bool == false) then
+						ToggleBk.BackgroundColor3 = Color3.fromRGB(255, 14, 14)
+						Toggle.Position = UDim2.fromScale(0, .5)
+					end
+					
+					return
+					
+				end
+				
+				if (bool == true) then
+					Tween(ToggleBk, Tween_Time, {
+						BackgroundColor3 = Color3.fromRGB(91, 255, 2);
+					}):Play()
+					Tween(Toggle, Tween_Time, {
+						Position = UDim2.fromScale(.635, .5);
+					}):Play()
+				elseif (bool == false) then
+					Tween(ToggleBk, Tween_Time, {
+						BackgroundColor3 = Color3.fromRGB(255, 14, 14);
+					}):Play()
+					Tween(Toggle, Tween_Time, {
+						Position = UDim2.fromScale(0, .5);
+					}):Play()
+				end
+			end
+			
+			return ToggleFunctions
+			
+		end
+		
+		function TabFunctions:SetupButton(NewButton : TextButton, ButtonName : string, ButtonDesc : string)
+			NewButton:FindFirstChild("title").Text = ButtonName
+			NewButton.LayoutOrder = #TabList:GetChildren() + 1
+			NewButton.Parent = TabList
+			
+			if ButtonDesc == nil then
+				NewButton:FindFirstChild("desc").Visible = false
+			else
+				NewButton:FindFirstChild("desc").Text = ButtonDesc
+			end
+
+		end
+		
+		function TabFunctions:SetupKeybind(NewKeybind : TextButton, DefaultKeybind, KeybindName, KeybindDesc)
+			NewKeybind:FindFirstChild("title").Text = KeybindName
+			NewKeybind.LayoutOrder = #TabList:GetChildren() + 1
+			NewKeybind.Parent = TabList
+
+			if KeybindDesc == nil then
+				NewKeybind:FindFirstChild("desc").Visible = false
+			else
+				NewKeybind:FindFirstChild("desc").Text = KeybindDesc
+			end
+			
+			local KeyBk = NewKeybind:FindFirstChild("KeyBk")
+			local KeyText = KeyBk:FindFirstChild("Key")
+			
+			local ActiveSelectedKey = false
+			
+			local KeybindFunctions = {}
+			
+			function KeybindFunctions:UpdateKeybind(Key)
+				
+				if Key == Enum.KeyCode.Unknown then
+					Key = {
+						Name = "..."
+					}
+				end
+				
+				local EnumName = Key.Name
+				KeyText.Text = tostring(EnumName):gsub("Keypad", "K "):upper()
+				selected_keybind = false
+			end
+			
+			function KeybindFunctions:InitUpdate()
+				
+				selected_keybind = true
+				
+				local KeyPressed, isChatting;
+				
+				KeybindFunctions:UpdateKeybind(Enum.KeyCode.Unknown)
+				
+				repeat
+					KeyPressed, isChatting = UserInputService.InputBegan:Wait()
+				until KeyPressed ~= nil and (not isChatting) and ((KeyPressed.KeyCode ~= nil and KeyPressed.KeyCode ~= Enum.KeyCode.Unknown) or (KeyPressed.UserInputType ~= nil and (KeyPressed.UserInputType == Enum.UserInputType.MouseButton1 or KeyPressed.UserInputType == Enum.UserInputType.MouseButton2 or KeyPressed.UserInputType == Enum.UserInputType.MouseButton3)))
+
+				if KeyPressed.UserInputType == Enum.UserInputType.Keyboard then
+					KeybindFunctions:UpdateKeybind(KeyPressed.KeyCode)
+					return KeyPressed.KeyCode
+				else
+					KeybindFunctions:UpdateKeybind(KeyPressed.UserInputType)
+					return KeyPressed.UserInputType
+				end
+			end
+			
+			if DefaultKeybind ~= nil and table.find(Enum.KeyCode:GetEnumItems(), DefaultKeybind) then
+				KeybindFunctions:UpdateKeybind(DefaultKeybind)
+			end
+			
+			return KeybindFunctions
+			
+		end
+		
+		function TabFunctions:SetupSlider(NewSlider : TextButton, SliderName : string, SliderMin : number, SliderMax : number, SliderDesc : string)
+			NewSlider:FindFirstChild("title").Text = SliderName
+			NewSlider.LayoutOrder = #TabList:GetChildren() + 1
+			NewSlider.Parent = TabList
+
+			if SliderDesc == nil then
+				NewSlider:FindFirstChild("desc").Visible = false
+			else
+				NewSlider:FindFirstChild("desc").Text = SliderDesc
+			end
+
+			local SliderBk = NewSlider:FindFirstChild("SliderBk")
+			local SliderBar = SliderBk:FindFirstChild("Bar")
+			local SliderText = SliderBk:FindFirstChild("SliderValue")
+			
+			local SliderFunctions = {}
+			
+			function SliderFunctions:UpdateSlider(Value : number)
+				if Value == nil or typeof(Value) ~= 'number' then
+					return error("\nslider value\nnot a number")
+				end
+				
+				local Diff = math.clamp(Value / SliderMax, 0, 1)
+				local RealValue = math.clamp(math.floor(Diff * SliderMax), SliderMin, SliderMax)
+				local Comma_Value, Comma_Max_Value = Comma(RealValue), Comma(math.floor(SliderMax))
+
+				SliderText.Text = tostring("%s / %s"):format(Comma_Value, Comma_Max_Value)
+				Tween(SliderBar, .5, {
+					Size = UDim2.fromScale(Diff, 1)
+				}):Play()
+				
+			end
+			
+			function SliderFunctions:PositionToValue(X)
+				local frameStart = SliderBk.AbsolutePosition.X
+				local frameEnd = frameStart + SliderBk.AbsoluteSize.X
+				local clampedX = math.clamp(X, frameStart, frameEnd)
+				local diff = (clampedX - frameStart) / (frameEnd - frameStart)
+				return SliderMin + (diff * (SliderMax - SliderMin))
+			end
+			
+			return SliderFunctions
+			
+		end
+		
+		function TabFunctions:SetupColorPicker(NewColorPicker : TextButton, ColorPickerName : string, DefaultColor : Color3, Callback, ColorPickerDescription : string)
+			
+			NewColorPicker:FindFirstChild("title").Text = ColorPickerName
+			NewColorPicker.LayoutOrder = #TabList:GetChildren() + 1
+			NewColorPicker.Parent = TabList
+			
+			if ColorPickerDescription == nil then
+				NewColorPicker:FindFirstChild("desc").Visible = false
+			else
+				NewColorPicker:FindFirstChild("desc").Text = ColorPickerDescription
+			end
+			
+			local Picker = NewColorPicker:FindFirstChild("ColorPicker")
+			local ColorSquare = NewColorPicker:FindFirstChild("ColorBk"):FindFirstChild("Color")
+			
+			NewColorPicker.MouseButton1Click:Connect(function()
+				Picker.Visible = not Picker.Visible
+			end)
+			
+			local Deco = Picker:FindFirstChild("Deco")
+			local Main = Picker:FindFirstChild("Main")
+			
+			local ColorBlock = Main:FindFirstChild("ColorBlock")
+			local ValueBlock = Main:FindFirstChild("ValueBlock")
+			
+			local IsChangingColorBlock, IsChangingValueBlock, IsChangingColor = false, false, false
+			
+			local function roundNum(n,decimalPlaces)
+				local nDP = 10^decimalPlaces
+				return math.floor(n*nDP)/nDP
+			end
+
+			local function getNormalizedCursorPosition(mousePosition, frame)
+				local framePosition = frame.AbsolutePosition
+				local frameSize = frame.AbsoluteSize
+
+				local relativeX = (mousePosition.X - framePosition.X) / frameSize.X
+				local relativeY = (mousePosition.Y - framePosition.Y) / frameSize.Y
+
+				return relativeX, relativeY
+			end
+
+			local function updatePickerPos()
+				local clrThing = ColorSquare.BackgroundColor3
+				local h,s,v = clrThing:ToHSV()
+				ColorBlock:FindFirstChild("Picker").Position = UDim2.new(1-h,0,1-s,0)
+				ValueBlock:FindFirstChild("Picker").Position = UDim2.new(0.5,0,1-v,0)
+			end
+			
+
+			ColorSquare:GetPropertyChangedSignal("BackgroundColor3"):Connect(function()
+				
+				local newClr = ColorSquare.BackgroundColor3
+				local nC1,nC2,nC3 = newClr:ToHSV()
+				
+				if Callback ~= nil and typeof(Callback) == 'function' then
+					Callback(newClr)
+				end
+				
+				if IsChangingColor == false then
+					updatePickerPos()
+				end
+
+			end)
+			
+			local function StartColorBlockChange()
+				IsChangingColorBlock = true
+				IsChangingColor = true
+				while IsChangingColorBlock == true do
+
+					local xPos,yPos = getNormalizedCursorPosition(Vector2.new(Mouse.X, Mouse.Y), ColorBlock)
+					xPos,yPos = math.clamp(xPos,0,1),math.clamp(yPos,0,1)
+
+					ColorBlock:FindFirstChild("Picker").Position = UDim2.new(xPos,0,yPos,0)
+
+					local h,s,v = ColorSquare.BackgroundColor3:ToHSV()
+
+					ColorSquare.BackgroundColor3 = Color3.fromHSV(1 - xPos,1 - yPos,v)
+					ColorBlock:FindFirstChild("Picker").BackgroundColor3 = Color3.fromHSV(1 - xPos, 1 - yPos, v)
+					
+					RunService.Heartbeat:Wait()
+				end IsChangingColor = false
+			end
+			
+			local function StartValueBlockChange()
+				IsChangingValueBlock = true
+				IsChangingColor = true
+				while IsChangingValueBlock == true do
+
+					local xPos,yPos = getNormalizedCursorPosition(Vector2.new(Mouse.X, Mouse.Y),ValueBlock)
+					yPos = math.clamp(yPos,0,1)
+
+					ValueBlock:FindFirstChild("Picker").Position = UDim2.new(.5,0,yPos,0)
+					ValueBlock:FindFirstChild("Picker").BackgroundColor3 = Color3.fromHSV(1 - yPos, 0, 1 - yPos)
+					
+					local h,s,v = ColorSquare.BackgroundColor3:ToHSV()
+					ColorSquare.BackgroundColor3 = Color3.fromHSV(h,s,1 - yPos)
+					ColorBlock:FindFirstChild("Picker").BackgroundColor3 = Color3.fromHSV(h, s, 1 - yPos)
+					
+					RunService.Heartbeat:Wait()
+				end IsChangingColor = false
+			end
+			
+			ColorBlock.InputBegan:Connect(function(inp)
+
+				if inp.UserInputType == Enum.UserInputType.MouseButton1 then
+					StartColorBlockChange()
+				end
+
+			end)
+			
+			ColorBlock.MouseLeave:Connect(function()
+				IsChangingColorBlock = false
+				
+				IsChangingColor = false
+			end)
+			
+			ColorBlock.MouseEnter:Connect(function()
+				if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+					StartColorBlockChange()
+				end
+			end)
+			
+			ColorBlock.InputEnded:Connect(function(inp)
+				
+				if inp.UserInputType == Enum.UserInputType.MouseButton1 then
+					IsChangingColorBlock = false
+					
+					IsChangingColor = false
+				end
+				
+			end)
+
+			ValueBlock.InputBegan:Connect(function(inp)
+
+				if inp.UserInputType == Enum.UserInputType.MouseButton1 then
+					
+					StartValueBlockChange()
+
+				end
+
+			end)
+			
+			ValueBlock.MouseEnter:Connect(function()
+				if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+					StartValueBlockChange()
+				end
+			end)
+			
+			ValueBlock.MouseLeave:Connect(function()
+				IsChangingColor = false
+				IsChangingValueBlock = false
+			end)
+			
+			ValueBlock.InputEnded:Connect(function(inp)
+
+				if inp.UserInputType == Enum.UserInputType.MouseButton1 then
+					IsChangingValueBlock = false
+					IsChangingColor = false
+				end
+
+			end)
+			
+		end
+		
+		return TabFunctions
+	end
+	
+	return USU, LibraryFunctions
+end
+
+Library.new = function()
+	
+	local newLibrary, lastShowUIFunction = {}, nil
+	
+	local USU, LibraryFunctions = BuildUSUGui()
+	
+	local UIVisible = true
+	
+	function newLibrary:GetVisible()
+		return UIVisible
+	end
+	
+	function newLibrary:SetVisible(bool : boolean)
+		if bool ~= nil and typeof(bool) == 'boolean' then
+			UIVisible = bool
+			if (bool == true) then
+				if lastShowUIFunction ~= nil then
+					pcall(lastShowUIFunction)
+					lastShowUIFunction = nil
+				end
+			elseif (bool == false) then
+				lastShowUIFunction = HideUI(USU)
+			end
+		else return error("Incorrect Visibility")
+		end
+	end
+	
+	function newLibrary:Tab(TabName : string)
+		local TabFrame, TabBtn = createTab()
+		
+		local TabFunctions = LibraryFunctions:SetupTab(TabName, TabFrame, TabBtn)
+		
+		local TabLibrary = {}
+		
+		function TabLibrary:Toggle(Info, Callback)
+			
+			if typeof(Info) ~= 'table' then
+				return
+			end
+			
+			local Default = Info.default
+			local ToggleName = Info.name
+			local ToggleDesc = Info.description
+			
+			local NewToggle = createToggle()
+			local CurrentValue = typeof(Default) == 'boolean' and Default or false
+			
+			local ToggleFunctions = TabFunctions:SetupToggle(NewToggle, ToggleName, Callback, typeof(ToggleDesc) == 'string' and ToggleDesc or nil)
+			
+			if Default ~= nil and typeof(Default) == 'boolean' then
+				ToggleFunctions:UpdateToggle(CurrentValue, true)
+			end
+			
+			if ToggleDesc == nil then
+				NewToggle:FindFirstChild("title").Position = UDim2.fromScale(NewToggle:FindFirstChild("title").Position.X.Scale, 0.5)
+				NewToggle:FindFirstChild("title").AnchorPoint = Vector2.new(NewToggle:FindFirstChild("title").AnchorPoint.X, .5)
+				NewToggle:FindFirstChild("title").Size = UDim2.fromScale(NewToggle:FindFirstChild("title").Size.X.Scale, 0.45)
+			end
+			
+			NewToggle.MouseButton1Click:Connect(function()
+				CurrentValue = not CurrentValue
+				ToggleFunctions:UpdateToggle(CurrentValue)
+			end)
+			
+			local SelfToggleFunctions = {}
+			
+			function SelfToggleFunctions:Get()
+				return CurrentValue
+			end
+			
+			function SelfToggleFunctions:Set(Value)
+				if typeof(Value) == 'boolean' then
+					CurrentValue = Value
+					ToggleFunctions:UpdateToggle(Value)
+					else return error("value is not a boolean.")
+				end
+			end
+			
+			return SelfToggleFunctions
+			
+		end
+		
+		function TabLibrary:Button(Info, Callback)
+			
+			if typeof(Info) ~= 'table' then
+				return
+			end
+			
+			local NewButton = createButton()
+			local ButtonName = Info.name
+			local ButtonDescription = Info.description
+			
+			if ButtonDescription == nil then
+				NewButton:FindFirstChild("title").Position = UDim2.fromScale(NewButton:FindFirstChild("title").Position.X.Scale, 0.5)
+				NewButton:FindFirstChild("title").AnchorPoint = Vector2.new(NewButton:FindFirstChild("title").AnchorPoint.X, .5)
+				NewButton:FindFirstChild("title").Size = UDim2.fromScale(NewButton:FindFirstChild("title").Size.X.Scale, 0.45)
+			end
+			
+			TabFunctions:SetupButton(NewButton, ButtonName, typeof(ButtonDescription) == 'string' and ButtonDescription or nil)
+			NewButton.MouseButton1Click:Connect(Callback)
+			
+		end
+		
+		function TabLibrary:Keybind(Info, Callback)
+			
+			if typeof(Info) ~= 'table' then
+				return
+			end
+			
+			if Callback == nil or typeof(Callback) ~= "function" then
+				return error("Keybind callback must be a function.")
+			end
+			
+			local PreviousConnection = nil
+			local NewKeybind = createKeybind()
+			local KeybindName = Info.name
+			local KeybindDescription = Info.description
+			local DefaultKeybind = Info.default ~= nil and Info.default or Enum.KeyCode.Unknown
+			
+			local CurrentValue = DefaultKeybind
+			
+			if KeybindDescription == nil then
+				NewKeybind:FindFirstChild("title").Position = UDim2.fromScale(NewKeybind:FindFirstChild("title").Position.X.Scale, 0.5)
+				NewKeybind:FindFirstChild("title").AnchorPoint = Vector2.new(NewKeybind:FindFirstChild("title").AnchorPoint.X, .5)
+				NewKeybind:FindFirstChild("title").Size = UDim2.fromScale(NewKeybind:FindFirstChild("title").Size.X.Scale, 0.45)
+			end
+			
+			local KeybindFunctions = TabFunctions:SetupKeybind(NewKeybind, DefaultKeybind, KeybindName, typeof(KeybindDescription) == 'string' and KeybindDescription or nil)
+			
+			local function CreateConnection()
+				
+				if PreviousConnection ~= nil then
+					PreviousConnection:Disconnect()
+					PreviousConnection = nil
+				end
+				
+				PreviousConnection = UserInputService.InputBegan:Connect(function(KeyPressed, isChatting)
+					if KeyPressed ~= nil and (not isChatting) and ((KeyPressed.KeyCode ~= nil and KeyPressed.KeyCode ~= Enum.KeyCode.Unknown) or (KeyPressed.UserInputType ~= nil and (KeyPressed.UserInputType == Enum.UserInputType.MouseButton1 or KeyPressed.UserInputType == Enum.UserInputType.MouseButton2 or KeyPressed.UserInputType == Enum.UserInputType.MouseButton3))) then
+
+						if KeyPressed.UserInputType == Enum.UserInputType.Keyboard then
+							if KeyPressed.KeyCode == CurrentValue and CurrentValue ~= Enum.KeyCode.Unknown then
+								if Callback ~= nil and typeof(Callback) == 'function' then
+									Callback(KeyPressed.KeyCode, isChatting)
+								end
+							end
+						elseif KeyPressed.KeyCode == Enum.KeyCode.Unknown then
+							if KeyPressed.UserInputType == CurrentValue then
+								if Callback ~= nil and typeof(Callback) == 'function' then
+									Callback(KeyPressed.UserInputType, isChatting)
+								end
+							end
+						end
+
+					end
+				end)
+			end
+			
+			if Info.default ~= nil then
+				if Callback ~= nil and typeof(Callback) == 'function' then
+					CreateConnection()
+				end
+			end
+			
+			NewKeybind.MouseButton1Click:Connect(function()
+				if PreviousConnection ~= nil then
+					PreviousConnection:Disconnect()
+					PreviousConnection = nil
+				end
+				if selected_keybind then return end
+				CurrentValue = KeybindFunctions:InitUpdate()
+				
+				CreateConnection()
+			end)
+			
+		end
+		
+		function TabLibrary:Slider(Info, Callback)
+			
+			if typeof(Info) ~= 'table' then
+				return
+			end
+			
+			if Info.name == nil or Info.min == nil or Info.max == nil then
+				return error("\nDebugging\nname: ".. tostring(Info.name).. " | slider min: ".. tostring(Info.min).. " | slider max: ".. tostring(Info.max))
+			end
+
+			local PreviousConnection = nil
+			local NewSlider = createSlider()
+			local SliderName = Info.name
+			local SliderDescription = Info.description
+			local SliderMax = Info.max
+			local SliderMin = Info.min
+			local DefaultValue = Info.default ~= nil and Info.default or 0
+			local CurrentValue = DefaultValue
+			
+			if Info.default ~= nil and typeof(Info.default) == 'number' then
+				if Callback ~= nil and typeof(Callback) == 'function' then
+					Callback(Info.default)
+				end
+			end
+			
+			local SliderFunctions = TabFunctions:SetupSlider(NewSlider, SliderName, SliderMin, SliderMax, SliderDescription)
+			
+			SliderFunctions:UpdateSlider(DefaultValue)
+			
+			local SlidingConnections = {}
+			
+			local function SetSliderPositionToMouse()
+				local Value = SliderFunctions:PositionToValue(Mouse.X)
+				SliderFunctions:UpdateSlider(Value)
+				if Callback ~= nil and typeof(Callback) == 'function' then
+					Callback(Value)
+				end
+			end
+			
+			local function KillSlidingConnection()
+				if #SlidingConnections > 0 then
+					for i, v in pairs(SlidingConnections) do
+						v:Disconnect()
+						SlidingConnections[i] = nil
+					end
+				end
+			end
+			
+			local function CreateSlidingConnection()
+				pcall(KillSlidingConnection)
+
+				table.insert(SlidingConnections, Mouse.Move:Connect(SetSliderPositionToMouse))
+			end
+			
+			NewSlider.MouseButton1Down:Connect(function()
+				SetSliderPositionToMouse()
+				CreateSlidingConnection()
+			end)
+			
+			NewSlider.MouseButton1Up:Connect(KillSlidingConnection)
+			NewSlider.MouseLeave:Connect(KillSlidingConnection)
+			NewSlider.MouseEnter:Connect(function()
+				if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+					CreateSlidingConnection()
+				end
+			end)
+			
+		end
+		
+		function TabLibrary:ColorPicker(Info, Callback)
+			
+			if typeof(Info) ~= 'table' then
+				return
+			end
+			
+			local NewColorPicker = createColorPicker()
+			
+			local Default = Info.default ~= nil and Info.default or Color3.fromRGB(255, 255, 255)
+			local ColorPickerName = Info.name
+			local ColorPickerDescription = Info.description
+			
+			TabFunctions:SetupColorPicker(NewColorPicker, ColorPickerName, Default, Callback, ColorPickerDescription)
+			
+			if Info.default ~= nil then
+				NewColorPicker:FindFirstChild("ColorBk"):FindFirstChild("Color").BackgroundColor3 = Default
+			end
+			
+		end
+		
+		return TabLibrary
+	end
+	
+	return newLibrary
+	
+end
+
+return Library
