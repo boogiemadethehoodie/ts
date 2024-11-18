@@ -615,11 +615,12 @@ function createTab()
 	List.BackgroundTransparency = 1
 	List.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	List.BorderSizePixel = 0
-	List.ClipsDescendants = false
+	List.ClipsDescendants = true
 	List.Position = UDim2.new(0.5, 0, 0.5, 0)
 	List.Size = UDim2.new(0.995000005, 0, 0.970000029, 0)
 	List.CanvasSize = UDim2.new(0, 0, 0, 0)
 	List.ScrollBarThickness = 3
+	List.AutomaticCanvasSize = Enum.AutomaticSize.Y
 
 	UIListLayout_2.Parent = List
 	UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
